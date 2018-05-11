@@ -5,12 +5,6 @@
 #include <QFile>
 #include <QTextStream>
 
-#include "HardwareControl/MCP3008.h"
-#include "HardwareControl/MCP23S09.h"
-#include "HardwareControl/multiplexer.h"
-#include "HardwareControl/chipslelectmanager.h"
-#include "SensorArray/sensorarraymanager.h"
-
 // Smart pointer to log file
 QScopedPointer<QFile>   m_logFile;
 
@@ -64,8 +58,6 @@ int main(int argc, char *argv[])
     qInstallMessageHandler(msgHandler);
 
     qInfo() << "------------START CT SCANMASTER KERNEL V1.0 2018 by CT ScanMasters-------------";
-
-    SensorArrayManager manager(10);
-
+    qInfo() << "KUT";
     return a.exec();
 }

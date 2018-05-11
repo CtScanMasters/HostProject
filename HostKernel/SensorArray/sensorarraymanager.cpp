@@ -1,4 +1,4 @@
-#include "SensorArrayManager.h"
+#include "sensorarraymanager.h"
 #include <QDebug>
 
 SensorArrayManager::SensorArrayManager(quint32 arrayOffset)

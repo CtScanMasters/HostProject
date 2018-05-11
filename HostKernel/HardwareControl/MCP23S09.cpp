@@ -25,12 +25,24 @@ quint8 MCP23S08::getAddress()
 
 bool MCP23S08::initialize()
 {
-    //SPI initialize IC here
+    m_txBuffer[0] = 0x40;
+    m_txBuffer[1] = 0x00;
+    m_txBuffer[2] = 0x00;
+
+    m_rxBuffer[0] = 0x00;
+    m_rxBuffer[1] = 0x00;
+    m_rxBuffer[2] = 0x00;
+
+    bcm2835_spi_transfernb(m_txBuffer, m_rxBuffer, 3);
 }
 
 void MCP23S08::setChannel(quint8 channelMask)
 {
-    //SPI communicates channel here
+    m_txBuffer[0] = 0x40;
+    m_txBuffer[1] = 0x12;
+    m_txBuffer[2] = channelMask;
+
+    bcm2835_spi_transfernb(m_txBuffer, m_rxBuffer, 3);
 }
 
 quint8 MCP23S08::getChannel()

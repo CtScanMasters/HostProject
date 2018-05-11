@@ -2,7 +2,7 @@
 #define MULTIPLEXER_H
 
 #include <QObject>
-#include "MessageLogger/messageLogger.h"
+#include "messagelogger/messagelogger.h"
 
 class Multiplexer : public QObject, private MessageLogger
 {

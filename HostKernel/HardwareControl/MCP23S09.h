@@ -2,7 +2,8 @@
 #define MCP23S08_H
 
 #include <QObject>
-#include "MessageLogger/messageLogger.h"
+#include "messagelogger/messagelogger.h"
+#include "hardwarecontrol/bcm2835.h"
 
 class MCP23S08 : public QObject, private MessageLogger
 {
@@ -23,6 +24,9 @@ class MCP23S08 : public QObject, private MessageLogger
         bool initialize();
         quint8 m_address;
         quint8 m_channelMask;
+
+        char m_txBuffer[3];
+        char m_rxBuffer[3];
 		
 	private slots:
 

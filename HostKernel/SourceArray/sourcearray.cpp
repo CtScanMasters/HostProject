@@ -1,4 +1,4 @@
-#include "SourceArray.h"
+#include "sourcearray.h"
 #include <QDebug>
 
 SourceArray::SourceArray(quint8 address)
@@ -24,11 +24,12 @@ quint8 SourceArray::getAddress()
 
 void SourceArray::setChannel(quint8 channelMask)
 {
+    logMessage(MSG_INFO, QString("setChannel: ").arg(channelMask));
     m_channelMask = channelMask;
     m_ioExpander->setChannel(channelMask);
 }
 
 quint8 SourceArray::getChannel()
 {
-
+    return m_channelMask;
 }

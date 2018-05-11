@@ -2,8 +2,8 @@
 #define SOURCEARRAY_H
 
 #include <QObject>
-#include "MessageLogger/messageLogger.h"
-#include "HardwareControl/MCP23S09.h"
+#include "messagelogger/messagelogger.h"
+#include "hardwarecontrol/MCP23S09.h"
 
 class SourceArray : public QObject, private MessageLogger
 {

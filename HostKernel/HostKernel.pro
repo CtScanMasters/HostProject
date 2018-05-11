@@ -1,7 +1,27 @@
+QT += core
 QT -= gui
 
-CONFIG += c++11 console
+CONFIG += c++11
+
+TARGET = HostKernel
+CONFIG += console
 CONFIG -= app_bundle
+
+TEMPLATE = app
+
+SOURCES += main.cpp \
+    hardwarecontrol/chipselectmanager.cpp \
+    hardwarecontrol/MCP23S09.cpp \
+    hardwarecontrol/MCP3008.cpp \
+    hardwarecontrol/multiplexer.cpp \
+    messagelogger/messagelogger.cpp \
+    sensorarray/sensorarray.cpp \
+    sensorarray/sensorarraymanager.cpp \
+    sensorarray/sensordata.cpp \
+    sourcearray/sourcearray.cpp \
+    sourcearray/sourcearraymanager.cpp \
+    hardwarecontrol/bcm2835.c \
+    kernel.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -14,27 +34,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += \
-        main.cpp \
-    HardwareControl/MCP23S09.cpp \
-    HardwareControl/MCP3008.cpp \
-    SensorArray/sensorarray.cpp \
-    SensorArray/sensorarraymanager.cpp \
-    SensorArray/sensordata.cpp \
-    SourceArray/sourcearray.cpp \
-    HardwareControl/chipselectmanager.cpp \
-    HardwareControl/multiplexer.cpp \
-    MessageLogger/messageLogger.cpp \
-    SourceArray/sourcearraymanager.cpp
-
 HEADERS += \
-    HardwareControl/MCP23S09.h \
-    HardwareControl/MCP3008.h \
-    SensorArray/sensorarray.h \
-    SensorArray/sensorarraymanager.h \
-    SensorArray/sensordata.h \
-    SourceArray/sourcearray.h \
-    HardwareControl/chipslelectmanager.h \
-    MessageLogger/messageLogger.h \
-    HardwareControl/multiplexer.h \
-    SourceArray/sourcearraymanager.h
+    hardwarecontrol/chipslelectmanager.h \
+    hardwarecontrol/MCP23S09.h \
+    hardwarecontrol/MCP3008.h \
+    hardwarecontrol/multiplexer.h \
+    messagelogger/messagelogger.h \
+    sensorarray/sensorarray.h \
+    sensorarray/sensorarraymanager.h \
+    sensorarray/sensordata.h \
+    sourcearray/sourcearray.h \
+    sourcearray/sourcearraymanager.h \
+    hardwarecontrol/bcm2835.h \
+    kernel.h

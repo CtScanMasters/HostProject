@@ -3,8 +3,8 @@
 
 #include <QObject>
 
-#include "MessageLogger/messageLogger.h"
-#include "HardwareControl/MCP3008.h"
+#include "messagelogger/messagelogger.h"
+#include "hardwarecontrol/MCP3008.h"
 #include "sensordata.h"
 
 class SensorArray : public QObject, private MessageLogger

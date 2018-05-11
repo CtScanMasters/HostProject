@@ -2,8 +2,8 @@
 #define CHIPSELECTMANAGER_H
 
 #include <QObject>
-#include "MessageLogger/messageLogger.h"
-#include "HardwareControl/Multiplexer.h"
+#include "messagelogger/messagelogger.h"
+#include "hardwarecontrol/multiplexer.h"
 
 class ChipSelectManager : public QObject, private MessageLogger
 {

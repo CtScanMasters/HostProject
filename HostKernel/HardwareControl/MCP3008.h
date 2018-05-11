@@ -2,7 +2,8 @@
 #define MCP3008_H
 
 #include <QObject>
-#include <MessageLogger/messageLogger.h>
+#include "messagelogger/messagelogger.h"
+#include "hardwarecontrol/bcm2835.h"
 
 class MCP3008 : public QObject, private MessageLogger
 {
@@ -19,7 +20,9 @@ class MCP3008 : public QObject, private MessageLogger
     private:
         quint8 m_address;
         bool initialize();
-        void setChannel(quint8 channel);
+
+        char m_txBuffer[3];
+        char m_rxBuffer[3];
 
 	private slots:
 

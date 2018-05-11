@@ -1,4 +1,4 @@
-#include "messageLogger.h"
+#include "messagelogger.h"
 #include <QDebug>
 
 MessageLogger::MessageLogger()

@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QList>
-#include "MessageLogger/messageLogger.h"
+#include "messagelogger/messagelogger.h"
 #include "sensorarray.h"
 #include "sensordata.h"
 
