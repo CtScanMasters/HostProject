@@ -1,7 +1,8 @@
 #include "sourcearraymanager.h"
 #include <QDebug>
 
-SourceArrayManager::SourceArrayManager()
+SourceArrayManager::SourceArrayManager(ChipSelectManager *chipSelectManager)
+    : m_chipSelectManager(chipSelectManager)
 {  
     enableLogging(true);
     setName("SourceArrayManager: ");
@@ -17,6 +18,7 @@ SourceArrayManager::SourceArrayManager()
 
 void SourceArrayManager::setSource(quint8 address, quint8 sensorMask)
 {
+    m_chipSelectManager->setChipSelect(address);
     m_sourceArrayList.at(address)->setChannel(sensorMask);
 }
 
@@ -25,4 +27,12 @@ quint8 SourceArrayManager::getSource(quint8 address)
     return m_sourceArrayList.at(address)->getChannel();
 }
 
-
+void SourceArrayManager::initialize()
+{
+    for(int i = 0; i < m_sourceArrayList.size(); i++)
+    {
+        logMessage(MSG_INFO, QString("initialize array: %1").arg(i));
+        m_chipSelectManager->setChipSelect(i);
+        m_sourceArrayList.at(i)->initialize();
+    }
+}

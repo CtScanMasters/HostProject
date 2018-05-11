@@ -16,12 +16,12 @@ class MCP23S08 : public QObject, private MessageLogger
         quint8 getAddress();
         void setChannel(quint8 channelMask);
         quint8 getChannel();
+        bool initialize();
 
     public slots:
 
     private:
-        QString m_logName;
-        bool initialize();
+        QString m_logName;        
         quint8 m_address;
         quint8 m_channelMask;
 

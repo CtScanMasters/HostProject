@@ -1,14 +1,23 @@
 #include "multiplexer.h"
 #include <QDebug>
 
-Multiplexer::Multiplexer(quint8 address, quint8 A0, quint8 A1, quint8 A2)
-    : m_address(address), m_A0(A0), m_A1(A1), m_A2(A2)
+Multiplexer::Multiplexer(quint8 address, quint8 enable, quint8 A0, quint8 A1, quint8 A2)
+    : m_address(address), m_enable(enable), m_A0(A0), m_A1(A1), m_A2(A2)
 {
     enableLogging(true);
 
     m_currentChannel = 0;
     setName(QString("Multiplexer %1: ").arg(m_address));
     logMessage(MSG_INFO, QString("build: channels: %1, %2, %3").arg(m_A0).arg(m_A1).arg(m_A2));
+    initialize();
+}
+
+void Multiplexer::initialize()
+{
+    bcm2835_gpio_fsel(m_enable, BCM2835_GPIO_FSEL_OUTP);
+    bcm2835_gpio_fsel(m_A0, BCM2835_GPIO_FSEL_OUTP);
+    bcm2835_gpio_fsel(m_A1, BCM2835_GPIO_FSEL_OUTP);
+    bcm2835_gpio_fsel(m_A2, BCM2835_GPIO_FSEL_OUTP);
 }
 
 void Multiplexer::setAddress(quint8 address)
@@ -26,9 +35,27 @@ quint8 Multiplexer::getAddress()
 void Multiplexer::setChannel(quint8 channel)
 {
     m_currentChannel = channel;
-    logMessage(MSG_INFO, QString("setChannel: %1").arg(m_currentChannel));
-    //Set the IO pins here
-    //set > m_currentChannel;
+
+    if(m_currentChannel == -1)
+    {
+        bcm2835_gpio_write(m_enable, HIGH);
+        logMessage(MSG_INFO, "setChannel: mux disabled");
+    }
+    else
+    {
+        bcm2835_gpio_write(m_enable, LOW);
+
+        logMessage(MSG_INFO, QString("setChannel: %1 : mask: %2 %3 %4")
+                    .arg(m_currentChannel)
+                    .arg((channel & 0x04) >> 2)
+                    .arg((channel & 0x02) >> 1)
+                    .arg((channel & 0x01) >> 0));
+
+        bcm2835_gpio_write(m_A0, (channel & 0x01) >> 0);
+        bcm2835_gpio_write(m_A1, (channel & 0x02) >> 1);
+        bcm2835_gpio_write(m_A2, (channel & 0x04) >> 2);
+    }
+
 }
 
 quint8 Multiplexer:: getChannel()

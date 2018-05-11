@@ -4,6 +4,7 @@
 #include <QDateTime>
 #include <QFile>
 #include <QTextStream>
+#include "kernel.h"
 
 // Smart pointer to log file
 QScopedPointer<QFile>   m_logFile;
@@ -51,13 +52,17 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
+
     m_logFile.reset(new QFile("SCANLOG.log"));
     m_logFile.data()->open(QFile::WriteOnly|QFile::Truncate);
     m_logFile.data()->close();
     m_logFile.data()->open(QFile::Append | QFile::Text);
     qInstallMessageHandler(msgHandler);
 
-    qInfo() << "------------START CT SCANMASTER KERNEL V1.0 2018 by CT ScanMasters-------------";
-    qInfo() << "KUT";
+    qInfo() << "CT SCANMASTER KERNEL V1.0 2018 by CT ScanMasters";
+
+    Kernel kernel;
+    kernel.start();
+
     return a.exec();
 }

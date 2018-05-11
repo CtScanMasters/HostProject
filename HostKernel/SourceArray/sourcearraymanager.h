@@ -5,21 +5,24 @@
 #include <QList>
 #include "messagelogger/messagelogger.h"
 #include "sourcearray.h"
+#include "hardwarecontrol/chipselectmanager.h"
 
 class SourceArrayManager : public QObject, private MessageLogger
 {
     Q_OBJECT
 
     public:
-        SourceArrayManager();
+        SourceArrayManager(ChipSelectManager *chipSelectManager);
         void setSource(quint8 address, quint8 sensorMask);
         quint8 getSource(quint8 address);
+        void initialize();
 
     public slots:
 
     private:
         QList<SourceArray *> m_sourceArrayList;
         quint8 m_numberOfArrays;
+        ChipSelectManager *m_chipSelectManager;
 		
 	private slots:
 

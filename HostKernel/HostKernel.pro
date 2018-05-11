@@ -21,7 +21,8 @@ SOURCES += main.cpp \
     sourcearray/sourcearray.cpp \
     sourcearray/sourcearraymanager.cpp \
     hardwarecontrol/bcm2835.c \
-    kernel.cpp
+    kernel.cpp \
+    scancontrol/scancontrol.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -35,7 +36,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 HEADERS += \
-    hardwarecontrol/chipslelectmanager.h \
     hardwarecontrol/MCP23S09.h \
     hardwarecontrol/MCP3008.h \
     hardwarecontrol/multiplexer.h \
@@ -46,4 +46,6 @@ HEADERS += \
     sourcearray/sourcearray.h \
     sourcearray/sourcearraymanager.h \
     hardwarecontrol/bcm2835.h \
-    kernel.h
+    kernel.h \
+    hardwarecontrol/chipselectmanager.h \
+    scancontrol/scancontrol.h

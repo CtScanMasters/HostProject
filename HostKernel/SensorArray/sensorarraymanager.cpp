@@ -1,8 +1,8 @@
 #include "sensorarraymanager.h"
 #include <QDebug>
 
-SensorArrayManager::SensorArrayManager(quint32 arrayOffset)
-    : m_arrayOffset(arrayOffset)
+SensorArrayManager::SensorArrayManager(quint32 arrayOffset, ChipSelectManager *chipSelectManager)
+    : m_arrayOffset(arrayOffset), m_chipSelectManager(chipSelectManager)
 {
     enableLogging(true);
     setName("SensorArrayManager: ");
@@ -33,6 +33,7 @@ void SensorArrayManager::doScan(quint8 address)
     {
         SensorData *sensorData = new SensorData(address);
         sensorData->addData(m_scanCounter);
+        m_chipSelectManager->setChipSelect(address + 8);
         m_arrayOneList.at(address)->getArrayData(*sensorData);
         m_sensorDataListTemp.append(sensorData);
 
@@ -41,6 +42,7 @@ void SensorArrayManager::doScan(quint8 address)
     {
         SensorData *sensorData = new SensorData(address);
         sensorData->addData(m_scanCounter - m_arrayOffset);
+        m_chipSelectManager->setChipSelect(address + 8);
         m_arrayTwoList.at(address >> 4)->getArrayData(*sensorData);
         m_sensorDataList.append(m_sensorDataListTemp.at(m_scanCounter - m_arrayOffset));
         m_sensorDataList.append(sensorData);
@@ -60,15 +62,15 @@ void SensorArrayManager::getScanData(QByteArray &byteArray)
         byteArray.append(byteArrayTemp);
     }
 
-    for(int i = 0; i < m_sensorDataList.size(); i++)
-    {
-        delete m_sensorDataList.at(i);
-    }
+//    for(int i = 0; i < m_sensorDataList.size(); i++)
+//    {
+//        delete m_sensorDataList.at(i);
+//    }
 
-    for(int i = 0; i < m_sensorDataListTemp.size(); i++)
-    {
-        delete m_sensorDataListTemp.at(i);
-    }
+//    for(int i = 0; i < m_sensorDataListTemp.size(); i++)
+//    {
+//        delete m_sensorDataListTemp.at(i);
+//    }
 
     m_scanCounter = 0;
 

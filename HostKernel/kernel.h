@@ -2,8 +2,11 @@
 #define KERNEL_H
 
 #include <QObject>
+#include <QTimer>
 #include "messagelogger/messagelogger.h"
 #include "hardwarecontrol/bcm2835.h"
+#include "scancontrol/scancontrol.h"
+
 
 class Kernel : public QObject, private MessageLogger
 {
@@ -13,11 +16,14 @@ class Kernel : public QObject, private MessageLogger
         Kernel();
 
     public slots:
+        void start();
 
     private:
-        void initialize();
+        QTimer m_timer;
+        ScanControl *m_scanControl;
 		
 	private slots:
+        void heartbeat();
 
 	signals:
 
