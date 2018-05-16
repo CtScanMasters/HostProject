@@ -13,7 +13,7 @@ class SourceArrayManager : public QObject, private MessageLogger
 
     public:
         SourceArrayManager(ChipSelectManager *chipSelectManager);
-        void setSource(quint8 address, quint8 sensorMask);
+        void setSource(quint8 address, quint8 sourceMask);
         quint8 getSource(quint8 address);
         void initialize();
 

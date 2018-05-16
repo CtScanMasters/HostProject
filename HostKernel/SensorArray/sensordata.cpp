@@ -14,6 +14,7 @@ void SensorData::addData(quint16 data)
 
 void SensorData::getData(QByteArray &byteArray)
 {
+    qDebug() << "Data: " << m_dataArray;
     byteArray.append(m_dataArray);
     byteArray.append(";");
 }

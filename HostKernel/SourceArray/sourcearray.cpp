@@ -23,8 +23,7 @@ quint8 SourceArray::getAddress()
 }
 
 void SourceArray::setChannel(quint8 channelMask)
-{
-    logMessage(MSG_INFO, QString("setChannel: %1").arg(channelMask));
+{    
     m_channelMask = channelMask;
     m_ioExpander->setChannel(channelMask);
 }

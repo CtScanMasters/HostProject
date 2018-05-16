@@ -16,10 +16,11 @@ SourceArrayManager::SourceArrayManager(ChipSelectManager *chipSelectManager)
     }
 }
 
-void SourceArrayManager::setSource(quint8 address, quint8 sensorMask)
+void SourceArrayManager::setSource(quint8 address, quint8 sourceMask)
 {
+    logMessage(MSG_INFO, QString("setSource: %1").arg(sourceMask));
     m_chipSelectManager->setChipSelect(address);
-    m_sourceArrayList.at(address)->setChannel(sensorMask);
+    m_sourceArrayList.at(address)->setChannel(sourceMask);
 }
 
 quint8 SourceArrayManager::getSource(quint8 address)

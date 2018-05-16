@@ -8,7 +8,7 @@ Multiplexer::Multiplexer(quint8 address, quint8 enable, quint8 A0, quint8 A1, qu
 
     m_currentChannel = 0;
     setName(QString("Multiplexer %1: ").arg(m_address));
-    logMessage(MSG_INFO, QString("build: channels: %1, %2, %3").arg(m_A0).arg(m_A1).arg(m_A2));
+    logMessage(MSG_INFO, QString("build: channels: EN=%1 A0=%2, A1=%3, A2=%4").arg(m_enable).arg(m_A0).arg(m_A1).arg(m_A2));
     initialize();
 }
 
@@ -45,11 +45,11 @@ void Multiplexer::setChannel(quint8 channel)
     {
         bcm2835_gpio_write(m_enable, LOW);
 
-        logMessage(MSG_INFO, QString("setChannel: %1 : mask: %2 %3 %4")
-                    .arg(m_currentChannel)
-                    .arg((channel & 0x04) >> 2)
-                    .arg((channel & 0x02) >> 1)
-                    .arg((channel & 0x01) >> 0));
+//        logMessage(MSG_INFO, QString("setChannel: %1 : mask: %2 %3 %4")
+//                    .arg(m_currentChannel)
+//                    .arg((channel & 0x04) >> 2)
+//                    .arg((channel & 0x02) >> 1)
+//                    .arg((channel & 0x01) >> 0));
 
         bcm2835_gpio_write(m_A0, (channel & 0x01) >> 0);
         bcm2835_gpio_write(m_A1, (channel & 0x02) >> 1);

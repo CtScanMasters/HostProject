@@ -15,17 +15,20 @@ class ScanControl : public QObject, private MessageLogger
 
     public:
         ScanControl(QObject *parent);
+        void newScan();
+        quint16 getScanCounter();
 
     public slots:
+        void doScan();
 
     private:
-        bool initialize();
         void buildScanControl();
 
-        QTimer m_interruptTimer;
-
-        bool m_isInitialized;
         quint8 m_arrayOffset;
+        quint16 m_scanCounter;
+
+        quint8 m_numberOfArrays;
+        quint8 m_numberOfSources;
 
         quint8 m_sourceMuxAddress;
         quint8 m_chipSelectPin0;
@@ -47,11 +50,13 @@ class ScanControl : public QObject, private MessageLogger
         SourceArrayManager *m_sourceArrayManager;
         SensorArrayManager *m_sensorArrayManager;
 
-		
+
+
 	private slots:
-        void doStuff();
+
 
 	signals:
+        void dataReadySignal(QByteArray);
 
 
 };

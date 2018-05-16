@@ -14,8 +14,7 @@ class SensorArrayManager : public QObject, private MessageLogger
 
     public:
         SensorArrayManager(quint32 arrayOffset, ChipSelectManager *chipSelectManager);
-        void doScan(quint8 address);
-        void getScanData(QByteArray &byteArray);       
+        void scanArray(quint8 address, QByteArray &byteArray);
 
     public slots:
 
@@ -27,11 +26,12 @@ class SensorArrayManager : public QObject, private MessageLogger
         quint8 m_numberOfArrays;
         quint8 m_numberOfOneArrays;
         quint8 m_numberOfTwoArrays;
-        QList<SensorArray *> m_arrayOneList;
-        QList<SensorArray *> m_arrayTwoList;
-        QList<SensorData *> m_sensorDataList;
-        QList<SensorData *> m_sensorDataListTemp;
-		
+
+        QList<SensorArray *> m_sensorArrayList;
+
+        QList<QByteArray> m_scanDataArrayListFirstRing;
+        QList<QByteArray> m_scanDataArrayList;
+
 	private slots:
 
 	signals:
