@@ -10,23 +10,27 @@ ChipSelectManager::ChipSelectManager(Multiplexer *muxCe0, quint8 chipSelect0, Mu
 
     setName(QString("ChipSelector: "));
     logMessage(MSG_INFO, "build");
+
+    m_muxCs0->initialize();
+    m_muxCs1->initialize();
 }
 
 void ChipSelectManager::setChipSelect(quint8 address)
 {
-    m_selectedAddress = address;
-    logMessage(MSG_INFO, QString("setChipSelect: %1").arg(m_selectedAddress));
+    m_selectedAddress = address;    
 
     if((m_selectedAddress >= 0) && (m_selectedAddress < 8))
     {
         bcm2835_spi_chipSelect(m_chipSelectPin1);
         m_muxCs1->setChannel(m_selectedAddress);
+        logMessage(MSG_INFO, QString("setChipSelect CS1: %1").arg(m_selectedAddress));
     }
     else if((m_selectedAddress > 7) && (m_selectedAddress < 16))
     {
         m_selectedAddress = address - 8;
         bcm2835_spi_chipSelect(m_chipSelectPin0);
         m_muxCs0->setChannel(m_selectedAddress);
+        logMessage(MSG_INFO, QString("setChipSelect CS0: %1").arg(m_selectedAddress));
     }
     else
     {

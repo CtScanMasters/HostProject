@@ -9,11 +9,16 @@ class ScanData : public QObject
 
     public:
         ScanData();
-        void addData(quint16 scanNumber, quint16 arrayAddress, quint16 sourceNumber, QByteArray byteArray);
+        void setScanNumber(quint16 scanNumber);
+        quint16 getScanNumber();
+        void addArrayScan(quint16 address, quint16 source);
+        void addSensorData(quint16 data);
+        QByteArray& getData();
 
     public slots:
 
     private:
+        quint16 m_scanNumber;
         QByteArray m_scanDataArray;
 		
 	private slots:

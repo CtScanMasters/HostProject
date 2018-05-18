@@ -5,22 +5,21 @@
 #include <QList>
 #include "messagelogger/messagelogger.h"
 #include "sensorarray.h"
-#include "sensordata.h"
 #include "hardwarecontrol/chipselectmanager.h"
+#include "scancontrol/scandata.h"
 
 class SensorArrayManager : public QObject, private MessageLogger
 {
     Q_OBJECT
 
     public:
-        SensorArrayManager(quint32 arrayOffset, ChipSelectManager *chipSelectManager);
-        void scanArray(quint8 address, QByteArray &byteArray);
+        SensorArrayManager(ChipSelectManager *chipSelectManager);
+        void scanArray(quint8 address, ScanData &scanData);
 
     public slots:
 
     private:
         ChipSelectManager *m_chipSelectManager;
-        quint8 m_arrayOffset;
         quint16 m_scanCounter;
         quint8 m_numberOfSensors;
         quint8 m_numberOfArrays;

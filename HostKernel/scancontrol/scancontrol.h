@@ -8,6 +8,7 @@
 #include "hardwarecontrol/multiplexer.h"
 #include "sourcearray/sourcearraymanager.h"
 #include "sensorarray/sensorarraymanager.h"
+#include "scandata.h"
 
 class ScanControl : public QObject, private MessageLogger
 {
@@ -15,17 +16,13 @@ class ScanControl : public QObject, private MessageLogger
 
     public:
         ScanControl(QObject *parent);
-        void newScan();
         quint16 getScanCounter();
 
     public slots:
-        void doScan();
+        void doScan(quint8 startAddress, ScanData &scanData);
 
     private:
         void buildScanControl();
-
-        quint8 m_arrayOffset;
-        quint16 m_scanCounter;
 
         quint8 m_numberOfArrays;
         quint8 m_numberOfSources;
@@ -46,11 +43,9 @@ class ScanControl : public QObject, private MessageLogger
 
         Multiplexer *m_multiplexerSensor;
         Multiplexer *m_multiplexerSource;
-        ChipSelectManager * m_chipSelectManager;
+        ChipSelectManager *m_chipSelectManager;
         SourceArrayManager *m_sourceArrayManager;
         SensorArrayManager *m_sensorArrayManager;
-
-
 
 	private slots:
 

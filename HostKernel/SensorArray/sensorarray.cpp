@@ -12,12 +12,12 @@ SensorArray::SensorArray(quint8 address, quint8 numberOfSensors)
 
 }
 
-void SensorArray::getArrayData(QByteArray &byteArray)
+void SensorArray::getArrayData(ScanData &scanData)
 {
     //logMessage(MSG_INFO, "getArrayData");
     for(int i = 0; i < m_numberOfSensors; i++)
     {
-        byteArray.append(m_adConverter->getData(i));
+        scanData.addSensorData(m_adConverter->getData(i));
     }
 }
 

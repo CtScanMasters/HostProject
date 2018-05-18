@@ -1,8 +1,8 @@
 #include "sensorarraymanager.h"
 #include <QDebug>
 
-SensorArrayManager::SensorArrayManager(quint32 arrayOffset, ChipSelectManager *chipSelectManager)
-    : m_arrayOffset(arrayOffset), m_chipSelectManager(chipSelectManager)
+SensorArrayManager::SensorArrayManager(ChipSelectManager *chipSelectManager)
+    : m_chipSelectManager(chipSelectManager)
 {
     enableLogging(true);
     setName("SensorArrayManager: ");
@@ -15,19 +15,17 @@ SensorArrayManager::SensorArrayManager(quint32 arrayOffset, ChipSelectManager *c
     for(int i = 0; i < m_numberOfArrays; i++)
     {
         m_sensorArrayList.append(new SensorArray(i, m_numberOfSensors));
+
     }
 }
 
-void SensorArrayManager::scanArray(quint8 address, QByteArray &byteArray)
+void SensorArrayManager::scanArray(quint8 address, ScanData &scanData)
 {
-    logMessage(MSG_INFO, QString("scanArray %1").arg(address));
-
     m_chipSelectManager->setChipSelect(address + 8);
 
-    for(int i = 0; i < m_numberOfSensors; i++)
-    {
-        m_sensorArrayList.at(address)->getArrayData(byteArray);
-    }
+    logMessage(MSG_INFO, QString("scanArray %1").arg(address));
+
+    m_sensorArrayList.at(address)->getArrayData(scanData);
 }
 
 

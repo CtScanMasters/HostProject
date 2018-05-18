@@ -9,7 +9,6 @@ Multiplexer::Multiplexer(quint8 address, quint8 enable, quint8 A0, quint8 A1, qu
     m_currentChannel = 0;
     setName(QString("Multiplexer %1: ").arg(m_address));
     logMessage(MSG_INFO, QString("build: channels: EN=%1 A0=%2, A1=%3, A2=%4").arg(m_enable).arg(m_A0).arg(m_A1).arg(m_A2));
-    initialize();
 }
 
 void Multiplexer::initialize()
@@ -18,6 +17,11 @@ void Multiplexer::initialize()
     bcm2835_gpio_fsel(m_A0, BCM2835_GPIO_FSEL_OUTP);
     bcm2835_gpio_fsel(m_A1, BCM2835_GPIO_FSEL_OUTP);
     bcm2835_gpio_fsel(m_A2, BCM2835_GPIO_FSEL_OUTP);
+
+    bcm2835_gpio_write(m_enable, 0);
+    bcm2835_gpio_write(m_A0, 0);
+    bcm2835_gpio_write(m_A1, 0);
+    bcm2835_gpio_write(m_A2, 0);
 }
 
 void Multiplexer::setAddress(quint8 address)

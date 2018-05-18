@@ -4,7 +4,7 @@
 SourceArray::SourceArray(quint8 address)
     : m_address(address)
 {
-    m_ioExpander = new MCP23S08(m_address);
+    m_ioExpander = new MCP23S09(m_address);
 
     enableLogging(true);
     setName(QString("SourceArray %1: ").arg(m_address));
@@ -22,10 +22,10 @@ quint8 SourceArray::getAddress()
     return m_address;
 }
 
-void SourceArray::setChannel(quint8 channelMask)
+void SourceArray::setChannel(quint8 channel)
 {    
-    m_channelMask = channelMask;
-    m_ioExpander->setChannel(channelMask);
+    m_channelMask = 0x01 << channel;
+    m_ioExpander->setChannel(m_channelMask);
 }
 
 quint8 SourceArray::getChannel()

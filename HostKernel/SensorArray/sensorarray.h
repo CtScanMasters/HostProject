@@ -5,7 +5,7 @@
 
 #include "messagelogger/messagelogger.h"
 #include "hardwarecontrol/MCP3008.h"
-#include "sensordata.h"
+#include "scancontrol/scandata.h"
 
 class SensorArray : public QObject, private MessageLogger
 {
@@ -13,7 +13,7 @@ class SensorArray : public QObject, private MessageLogger
 
     public:
         SensorArray(quint8 address, quint8 numberOfSensors);
-        void getArrayData(QByteArray &byteArray);
+        void getArrayData(ScanData &scanData);
 
     public slots:
 

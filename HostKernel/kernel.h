@@ -16,8 +16,7 @@ class Kernel : public QObject, private MessageLogger
         Kernel();
 
     public slots:
-        void start();
-        void processData(QByteArray byteArray);
+        void processData();
 
     private:
         QTimer m_heartBeatTimer;
@@ -25,10 +24,11 @@ class Kernel : public QObject, private MessageLogger
         ScanControl *m_scanControl;
         bool m_hardwareInitialized;
 
+        QList<ScanData* > m_scanDataList;
+
         bool initializeHardwareControl();
 		
 	private slots:
-        void heartbeat();
         void makeScan();
 
 	signals:

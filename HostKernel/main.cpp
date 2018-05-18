@@ -62,7 +62,6 @@ int main(int argc, char *argv[])
     qInfo() << "CT SCANMASTER KERNEL V1.0 2018 by CT ScanMasters";
 
     Kernel kernel;
-    kernel.start();
 
     return a.exec();
 }

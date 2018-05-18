@@ -13,14 +13,14 @@ class SourceArray : public QObject, private MessageLogger
         SourceArray(quint8 address);
         void setAddress(quint8 address);
         quint8 getAddress();
-        void setChannel(quint8 channelMask);
+        void setChannel(quint8 channel);
         quint8 getChannel();
         void initialize();
 
     public slots:
 
     private:
-        MCP23S08 *m_ioExpander;
+        MCP23S09 *m_ioExpander;
         quint8 m_address;
         quint8 m_channelMask;
 		

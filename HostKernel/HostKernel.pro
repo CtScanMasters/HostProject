@@ -17,7 +17,6 @@ SOURCES += main.cpp \
     messagelogger/messagelogger.cpp \
     sensorarray/sensorarray.cpp \
     sensorarray/sensorarraymanager.cpp \
-    sensorarray/sensordata.cpp \
     sourcearray/sourcearray.cpp \
     sourcearray/sourcearraymanager.cpp \
     hardwarecontrol/bcm2835.c \
@@ -43,7 +42,6 @@ HEADERS += \
     messagelogger/messagelogger.h \
     sensorarray/sensorarray.h \
     sensorarray/sensorarraymanager.h \
-    sensorarray/sensordata.h \
     sourcearray/sourcearray.h \
     sourcearray/sourcearraymanager.h \
     hardwarecontrol/bcm2835.h \

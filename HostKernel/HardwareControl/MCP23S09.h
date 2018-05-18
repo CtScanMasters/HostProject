@@ -5,13 +5,13 @@
 #include "messagelogger/messagelogger.h"
 #include "hardwarecontrol/bcm2835.h"
 
-class MCP23S08 : public QObject, private MessageLogger
+class MCP23S09 : public QObject, private MessageLogger
 {
     Q_OBJECT
 
     public:
 
-        MCP23S08(quint8 address);
+        MCP23S09(quint8 address);
         void setAddress(quint8 address);
         quint8 getAddress();
         void setChannel(quint8 channelMask);
