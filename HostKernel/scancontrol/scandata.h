@@ -2,8 +2,9 @@
 #define SCANDATA_H
 
 #include <QObject>
+#include "messagelogger/messagelogger.h"
 
-class ScanData : public QObject
+class ScanData : public QObject, private MessageLogger
 {
     Q_OBJECT
 
@@ -18,8 +19,10 @@ class ScanData : public QObject
     public slots:
 
     private:
+        QString m_logName;
         quint16 m_scanNumber;
         QByteArray m_scanDataArray;
+        void addData(quint16 data);
 		
 	private slots:
 

@@ -34,7 +34,7 @@ void ScanControl::doScan(quint8 startAddress, ScanData &scanData)
 {
     logMessage(MSG_INFO, QString("doScan: %1").arg(startAddress));
 
-    for(quint8 arrayAddress = 0; arrayAddress < m_numberOfArrays; arrayAddress++)
+    for(quint8 arrayAddress = startAddress; arrayAddress < (startAddress + 4); arrayAddress++)
     {
         for(quint8 sourceNumber = 0; sourceNumber < m_numberOfSources; sourceNumber++)
         {

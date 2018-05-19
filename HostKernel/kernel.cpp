@@ -24,13 +24,37 @@ void Kernel::makeScan()
 {
     logMessage(MSG_INFO, "makeScan");
 
+    qWarning() << "YEAH----------------------------0000000";
+
     m_scanDataList.append(new ScanData);
     m_scanDataList.last()->setScanNumber(m_scanDataList.size());
 
     m_scanControl->doScan(0, *m_scanDataList.last());
 
-//    m_scanControl->doScan(4, *m_scanDataList.last());
+    QByteArray byteArray;
+    byteArray = m_scanDataList.last()->getData();
 
+    QList<QByteArray> arrayList;
+    arrayList = byteArray.split(':');
+
+    for(int i = 0; i < arrayList.size(); i++)
+    {
+        qDebug() << arrayList.at(i);
+    }
+
+    qWarning() << "YEAH----------------------------44444444";
+
+    m_scanDataList.append(new ScanData);
+    m_scanDataList.last()->setScanNumber(m_scanDataList.size());
+
+    m_scanControl->doScan(4, *m_scanDataList.last());
+    byteArray = m_scanDataList.last()->getData();
+    arrayList = byteArray.split(':');
+
+    for(int i = 0; i < arrayList.size(); i++)
+    {
+        qDebug() << arrayList.at(i);
+    }
 }
 
 
