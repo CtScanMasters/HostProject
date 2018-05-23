@@ -4,9 +4,9 @@
 SensorArrayManager::SensorArrayManager(ChipSelectManager *chipSelectManager)
     : m_chipSelectManager(chipSelectManager)
 {
-    enableLogging(true);
     setName("SensorArrayManager: ");
     logMessage(MSG_INFO, "build");
+    enableLogging(false);
 
     m_scanCounter = 0;
     m_numberOfSensors = 8;

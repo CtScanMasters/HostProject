@@ -29,20 +29,22 @@ QString MessageLogger::getName()
 
 void MessageLogger::logMessage(messageType type, QString message)
 {
-    QString logMessage;
-    logMessage.append(m_logname);
-    logMessage.append(message);
-
-    switch(type)
+    if(m_loggingIsEnabled)
     {
-        case MSG_DEBUG:     qDebug() << logMessage;
-        break;
-        case MSG_WARNING:   qWarning() << logMessage;
-        break;
-        case MSG_CRITICAL:  qCritical() << logMessage;
-        break;
-        case MSG_INFO:      qInfo() << logMessage;
-        break;
-    }
+        QString logMessage;
+        logMessage.append(m_logname);
+        logMessage.append(message);
 
+        switch(type)
+        {
+            case MSG_DEBUG:     qDebug() << logMessage;
+            break;
+            case MSG_WARNING:   qWarning() << logMessage;
+            break;
+            case MSG_CRITICAL:  qCritical() << logMessage;
+            break;
+            case MSG_INFO:      qInfo() << logMessage;
+            break;
+        }
+    }
 }

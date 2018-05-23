@@ -2,6 +2,7 @@
 #define SCANCONTROL_H
 
 #include <QObject>
+#include <QTime>
 #include "messagelogger/messagelogger.h"
 #include "hardwarecontrol/bcm2835.h"
 #include "hardwarecontrol/chipselectmanager.h"

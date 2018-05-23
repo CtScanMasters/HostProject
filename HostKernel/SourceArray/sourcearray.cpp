@@ -6,9 +6,9 @@ SourceArray::SourceArray(quint8 address)
 {
     m_ioExpander = new MCP23S09(m_address);
 
-    enableLogging(true);
     setName(QString("SourceArray %1: ").arg(m_address));
     logMessage(MSG_INFO, "build");
+    enableLogging(false);
 }
 
 void SourceArray::setAddress(quint8 address)

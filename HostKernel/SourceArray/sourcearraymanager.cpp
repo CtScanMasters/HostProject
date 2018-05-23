@@ -3,10 +3,10 @@
 
 SourceArrayManager::SourceArrayManager(ChipSelectManager *chipSelectManager)
     : m_chipSelectManager(chipSelectManager)
-{  
-    enableLogging(true);
+{      
     setName("SourceArrayManager: ");
     logMessage(MSG_INFO, "build");
+    enableLogging(false);
 
     m_numberOfArrays = 8;
 

@@ -1,5 +1,6 @@
 QT += core
 QT -= gui
+QT += network
 
 CONFIG += c++11
 
@@ -22,7 +23,9 @@ SOURCES += main.cpp \
     hardwarecontrol/bcm2835.c \
     kernel.cpp \
     scancontrol/scancontrol.cpp \
-    scancontrol/scandata.cpp
+    scancontrol/scandata.cpp \
+    tcphandler/server.cpp \
+    tcphandler/sockethandler.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -48,4 +51,7 @@ HEADERS += \
     kernel.h \
     hardwarecontrol/chipselectmanager.h \
     scancontrol/scancontrol.h \
-    scancontrol/scandata.h
+    scancontrol/scandata.h \
+    tcphandler/server.h \
+    tcphandler/sockethandler.h \
+    tcphandler/commandlist.h

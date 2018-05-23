@@ -32,6 +32,8 @@ bool MCP3008::initialize()
     m_rxBuffer[0] = 0x00;
     m_rxBuffer[1] = 0x00;
     m_rxBuffer[2] = 0x00;
+
+    return true;
 }
 
 quint16 MCP3008::getData(quint8 channel)

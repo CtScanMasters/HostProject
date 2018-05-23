@@ -4,9 +4,9 @@
 SensorArray::SensorArray(quint8 address, quint8 numberOfSensors)
     : m_address(address), m_numberOfSensors(numberOfSensors)
 {
-    enableLogging(true);
     setName(QString("SensorArray %1: ").arg(m_address));
     logMessage(MSG_INFO, "build");
+    enableLogging(false);
 
     m_adConverter = new MCP3008(m_address);
 

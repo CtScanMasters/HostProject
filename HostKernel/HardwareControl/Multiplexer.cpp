@@ -40,7 +40,7 @@ void Multiplexer::setChannel(quint8 channel)
 {
     m_currentChannel = channel;
 
-    if(m_currentChannel == -1)
+    if(m_currentChannel == 255)
     {
         bcm2835_gpio_write(m_enable, HIGH);
         logMessage(MSG_INFO, "setChannel: mux disabled");

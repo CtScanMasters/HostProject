@@ -1,12 +1,13 @@
 #include "scancontrol.h"
 #include <QDebug>
+#include <QThread>
 #include "hardwarecontrol/bcm2835.h"
 
 ScanControl::ScanControl(QObject *parent)
 {
-    enableLogging(true);
     setName("ScanControl: ");
     logMessage(MSG_INFO, "build");
+    enableLogging(false);
 
     m_numberOfArrays = 8;
     m_numberOfSources = 8;
@@ -39,11 +40,8 @@ void ScanControl::doScan(quint8 startAddress, ScanData &scanData)
         for(quint8 sourceNumber = 0; sourceNumber < m_numberOfSources; sourceNumber++)
         {
             m_sourceArrayManager->setSource(arrayAddress, sourceNumber);
-
-            //Wachtijd voor sensoren om op sterkte te komen????
-
+            QThread::usleep(300);
             scanData.addArrayScan(arrayAddress, sourceNumber);
-
             m_sensorArrayManager->scanArray(arrayAddress, scanData);
         }
     }

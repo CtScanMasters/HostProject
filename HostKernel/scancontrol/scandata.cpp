@@ -8,9 +8,9 @@ ScanData::ScanData()
 
 void ScanData::setScanNumber(quint16 scanNumber)
 {
-    m_logName = QString("scandata %1").arg(scanNumber);
+    m_logName = QString("scandata %1: ").arg(scanNumber);
     setName(m_logName);
-    logMessage(MSG_INFO, "new scan data");
+    logMessage(MSG_INFO, "new data");
 
     m_scanNumber = scanNumber;
     m_scanDataArray.append(':');

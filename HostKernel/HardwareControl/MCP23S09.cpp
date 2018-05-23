@@ -34,6 +34,8 @@ bool MCP23S09::initialize()
     m_rxBuffer[2] = 0x00;
 
     bcm2835_spi_transfernb(m_txBuffer, m_rxBuffer, 3);
+
+    return true;
 }
 
 void MCP23S09::setChannel(quint8 channelMask)
@@ -47,7 +49,7 @@ void MCP23S09::setChannel(quint8 channelMask)
 
 quint8 MCP23S09::getChannel()
 {
-    quint8 channelLevel = 0;
+    //quint8 channelLevel = 0;
     //Read channel level here
 
     return m_channelMask;

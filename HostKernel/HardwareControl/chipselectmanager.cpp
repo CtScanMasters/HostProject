@@ -4,12 +4,11 @@
 ChipSelectManager::ChipSelectManager(Multiplexer *muxCe0, quint8 chipSelect0, Multiplexer *muxCe1, quint8 chipSelect1)
     : m_muxCs0(muxCe0), m_chipSelectPin0(chipSelect0), m_muxCs1(muxCe1), m_chipSelectPin1(chipSelect1)
 {
-    enableLogging(true);
-
     m_selectedAddress = 0;
 
     setName(QString("ChipSelector: "));
     logMessage(MSG_INFO, "build");
+    enableLogging(false);
 
     m_muxCs0->initialize();
     m_muxCs1->initialize();
