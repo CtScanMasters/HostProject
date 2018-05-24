@@ -44,6 +44,8 @@ void MCP23S09::setChannel(quint8 channelMask)
     m_txBuffer[1] = 0x12;
     m_txBuffer[2] = channelMask;
 
+    //logMessage(MSG_INFO, QString::number(channelMask, 16));
+
     bcm2835_spi_transfernb(m_txBuffer, m_rxBuffer, 3);
 }
 

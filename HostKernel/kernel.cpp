@@ -6,8 +6,8 @@
 Kernel::Kernel()
 {
     m_iAmReady = false;
-    m_arrayOffset = 10;
-    m_numberOfScans = 200;
+    m_arrayOffset = 1;
+    m_numberOfScans = 3;
     m_scanCounter = 0;
     m_hostPortNumber = 5010;
     m_sendCounter = 0;
@@ -34,6 +34,7 @@ void Kernel::makeScan()
         {
             m_scanDataList.append(new ScanData);
             m_scanDataList.last()->setScanNumber(m_scanCounter);
+            qDebug() << m_scanDataList.last()->getData();
             m_scanControl->doScan(0, *m_scanDataList.last());
             logMessage(MSG_INFO, QString("makeScan 1:%1").arg(m_scanCounter));
         }
@@ -135,7 +136,6 @@ void Kernel::dataDelivery()
         writeTcpData();
         m_scanDataList.removeLast();
     }
-
 }
 
 void Kernel::dataEnd()

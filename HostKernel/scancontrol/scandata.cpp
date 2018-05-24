@@ -12,10 +12,7 @@ void ScanData::setScanNumber(quint16 scanNumber)
     setName(m_logName);
     logMessage(MSG_INFO, "new data");
 
-    m_scanNumber = scanNumber;
-    m_scanDataArray.append(':');
-    addData(scanNumber);
-    m_scanDataArray.append(':');
+    m_scanNumber = scanNumber;    
 }
 
 quint16 ScanData::getScanNumber()
@@ -25,11 +22,9 @@ quint16 ScanData::getScanNumber()
 
 void ScanData::addArrayScan(quint16 address, quint16 source)
 {
-    m_scanDataArray.append(':');
+    addData(m_scanNumber);
     addData(address);
-    m_scanDataArray.append(':');
     addData(source);
-    m_scanDataArray.append(':');
 }
 
 void ScanData::addSensorData(quint16 data)

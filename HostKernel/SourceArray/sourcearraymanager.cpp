@@ -25,6 +25,12 @@ void SourceArrayManager::setSource(quint8 address, quint8 sourceChannel)
     m_sourceArrayList.at(address)->setChannel(sourceChannel);
 }
 
+void SourceArrayManager::clearSource(quint8 address)
+{
+    m_chipSelectManager->setChipSelect(address);
+    m_sourceArrayList.at(address)->clearChannels();
+}
+
 quint8 SourceArrayManager::getSource(quint8 address)
 {
     return m_sourceArrayList.at(address)->getChannel();

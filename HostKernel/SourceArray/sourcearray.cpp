@@ -28,6 +28,11 @@ void SourceArray::setChannel(quint8 channel)
     m_ioExpander->setChannel(m_channelMask);
 }
 
+void SourceArray::clearChannels()
+{
+    m_ioExpander->setChannel(0x00);
+}
+
 quint8 SourceArray::getChannel()
 {
     return m_channelMask;

@@ -18,6 +18,7 @@ void SensorArray::getArrayData(ScanData &scanData)
     for(int i = 0; i < m_numberOfSensors; i++)
     {
         scanData.addSensorData(m_adConverter->getData(i));
+        //qDebug() << m_adConverter->getData(i);
     }
 }
 

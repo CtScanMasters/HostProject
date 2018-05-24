@@ -44,6 +44,7 @@ void ScanControl::doScan(quint8 startAddress, ScanData &scanData)
             scanData.addArrayScan(arrayAddress, sourceNumber);
             m_sensorArrayManager->scanArray(arrayAddress, scanData);
         }
+        m_sourceArrayManager->clearSource(arrayAddress);
     }
 }
 

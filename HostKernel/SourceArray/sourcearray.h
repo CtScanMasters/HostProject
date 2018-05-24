@@ -14,6 +14,7 @@ class SourceArray : public QObject, private MessageLogger
         void setAddress(quint8 address);
         quint8 getAddress();
         void setChannel(quint8 channel);
+        void clearChannels();
         quint8 getChannel();
         void initialize();
 

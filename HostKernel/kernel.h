@@ -29,7 +29,7 @@ class Kernel : public QObject, private MessageLogger
         bool m_hardwareInitialized;
 
         quint32 m_arrayOffset;
-        quint8 m_numberOfScans;
+        quint16 m_numberOfScans;
         quint32 m_scanCounter;
         quint32 m_sendCounter;
 
