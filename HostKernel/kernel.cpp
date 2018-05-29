@@ -6,8 +6,8 @@
 Kernel::Kernel()
 {
     m_iAmReady = false;
-    m_arrayOffset = 2;
-    m_numberOfScans = 10;
+    m_arrayOffset = 1;
+    m_numberOfScans = 3;
     m_scanCounter = 0;
     m_hostPortNumber = 5010;
     m_sendCounter = 0;
