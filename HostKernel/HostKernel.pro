@@ -25,7 +25,10 @@ SOURCES += main.cpp \
     scancontrol/scancontrol.cpp \
     scancontrol/scandata.cpp \
     tcphandler/server.cpp \
-    tcphandler/sockethandler.cpp
+    tcphandler/sockethandler.cpp \
+    actuatorcontrol/actuator.cpp \
+    actuatorcontrol/actuatorcontroller.cpp \
+    actuatorcontrol/actuatorthread.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -54,4 +57,7 @@ HEADERS += \
     scancontrol/scandata.h \
     tcphandler/server.h \
     tcphandler/sockethandler.h \
-    tcphandler/commandlist.h
+    tcphandler/commandlist.h \
+    actuatorcontrol/actuator.h \
+    actuatorcontrol/actuatorcontroller.h \
+    actuatorcontrol/actuatorthread.h

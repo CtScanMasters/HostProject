@@ -8,6 +8,7 @@
 #include "hardwarecontrol/bcm2835.h"
 #include "scancontrol/scancontrol.h"
 #include "tcphandler/server.h"
+#include "actuatorcontrol/actuatorcontroller.h"
 
 
 class Kernel : public QObject, private MessageLogger
@@ -25,6 +26,7 @@ class Kernel : public QObject, private MessageLogger
         QTimer m_scanTimer;
         ScanControl *m_scanControl;
         Server *m_server;
+        ActuatorController *m_actuatorController;
         quint16 m_hostPortNumber;
         bool m_hardwareInitialized;
 
@@ -52,8 +54,13 @@ class Kernel : public QObject, private MessageLogger
         void newScanData();
         void dataDelivery();
         void dataEnd();
+        void actuatorJogForward();
+        void actuatorJogBack();
+        void actuatorPosition();
+        void actuatorHome();
+        void actuatorStop();
 
-		
+
 	private slots:
         void makeScan();
         void readTcpData();

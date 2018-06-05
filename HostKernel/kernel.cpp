@@ -6,8 +6,8 @@
 Kernel::Kernel()
 {
     m_iAmReady = false;
-    m_arrayOffset = 1;
-    m_numberOfScans = 3;
+    m_arrayOffset = 2;
+    m_numberOfScans = 100;
     m_scanCounter = 0;
     m_hostPortNumber = 5010;
     m_sendCounter = 0;
@@ -46,11 +46,13 @@ void Kernel::makeScan()
 
         m_scanCounter++;
 
-        makeScan();
+        m_actuatorController->setSetpointPosition(m_actuatorController->getPosition() + 10);
+        m_actuatorController->moveActuatorTo();
     }
     else
     {
         logMessage(MSG_INFO, QString("scan finished, %1 scans made").arg(m_scanCounter));
+        m_actuatorController->stopActuatorMovement();
         commandHandler(COMMAND_SCAN_NEW_DATA);
     }
 
@@ -65,7 +67,9 @@ void Kernel::scanStart()
         m_iAmReady = false;
         m_isScanStopped = false;
         m_time.start();
-        makeScan();
+        m_actuatorController->setSetpointPosition(m_actuatorController->getPosition() + 200);
+        m_actuatorController->moveActuatorTo();
+        qDebug() <<"SIGNAL YEAH" << connect(m_actuatorController, SIGNAL(actuatorReadySignal()), this, SLOT(makeScan()));
     }
     else
     {
@@ -78,12 +82,14 @@ void Kernel::scanStart()
 void Kernel::scanStop()
 {
     logMessage(MSG_INFO, "stop scan");
+    disconnect(m_actuatorController, SIGNAL(actuatorReadySignal()), this, SLOT(makeScan()));
     m_isScanStopped = true;
     m_iAmReady = true;
     m_scanCounter = 0;
     m_sendCounter = 0;
     m_bufferOut.clear();
     m_bufferIn.clear();
+    m_actuatorController->stopActuatorMovement();
 
 }
 
@@ -159,6 +165,36 @@ void Kernel::writeTcpData()
     m_bufferOut.clear();
 }
 
+void Kernel::actuatorJogForward()
+{
+//    m_actuatorController->setSetpointPosition(999999);
+//    m_actuatorController->moveActuatorTo();
+      m_actuatorController->moveActuatorForward();
+}
+
+void Kernel::actuatorJogBack()
+{
+//    m_actuatorController->setSetpointPosition(-999999);
+//    m_actuatorController->moveActuatorTo();
+    m_actuatorController->moveActuatorBackward();
+}
+
+void Kernel::actuatorPosition()
+{
+
+}
+
+void Kernel::actuatorHome()
+{
+    m_actuatorController->setSetpointPosition(-999999);
+    m_actuatorController->moveActuatorTo();
+}
+
+void Kernel::actuatorStop()
+{
+    m_actuatorController->stopActuatorMovement();
+}
+
 void Kernel::commandHandler(quint8 command)
 {
     switch(command)
@@ -185,16 +221,19 @@ void Kernel::commandHandler(quint8 command)
         dataEnd();
         break;
     case COMMAND_ACTUATOR_FORWARD:
-//        actuatorJogForward();
+        actuatorJogForward();
         break;
     case COMMAND_ACTUATOR_BACKWARD:
-//        actuatorJogBack();
+        actuatorJogBack();
         break;
     case COMMAND_ACTUATOR_POSITION:
-//        actuatorPosition();
+        actuatorPosition();
         break;
     case COMMAND_ACTUATOR_HOME:
-//        actuatorHome();
+        actuatorHome();
+        break;
+    case COMMAND_ACTUATOR_STOP:
+        actuatorStop();
         break;
     case COMMAND_SENSOR_VALUE:
 //        arrayGetSensor();
@@ -248,6 +287,7 @@ bool Kernel::initializeHardwareControl()
 
     m_scanControl = new ScanControl(this);
     m_server = new Server(5010);
+    m_actuatorController = new ActuatorController;
 
     return succeeded;
 }
