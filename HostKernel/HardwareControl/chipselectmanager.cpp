@@ -8,7 +8,7 @@ ChipSelectManager::ChipSelectManager(Multiplexer *muxCe0, quint8 chipSelect0, Mu
 
     setName(QString("ChipSelector: "));
     logMessage(MSG_INFO, "build");
-    enableLogging(false);
+    enableLogging(true);
 
     m_muxCs0->initialize();
     m_muxCs1->initialize();

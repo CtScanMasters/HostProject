@@ -35,13 +35,23 @@ bool MCP23S09::initialize()
 
     bcm2835_spi_transfernb(m_txBuffer, m_rxBuffer, 3);
 
+//    m_txBuffer[0] = 0x40;
+//    m_txBuffer[1] = 0x06;
+//    m_txBuffer[2] = 0xFF;
+
+//    m_rxBuffer[0] = 0x00;
+//    m_rxBuffer[1] = 0x00;
+//    m_rxBuffer[2] = 0x00;
+
+//    bcm2835_spi_transfernb(m_txBuffer, m_rxBuffer, 3);
+
     return true;
 }
 
 void MCP23S09::setChannel(quint8 channelMask)
 {
     m_txBuffer[0] = 0x40;
-    m_txBuffer[1] = 0x12;
+    m_txBuffer[1] = 0x09;
     m_txBuffer[2] = channelMask;
 
     //logMessage(MSG_INFO, QString::number(channelMask, 16));

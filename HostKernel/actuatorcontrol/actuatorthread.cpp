@@ -10,13 +10,13 @@ ActuatorThread::ActuatorThread(Actuator *actuator)
 
 void ActuatorThread::doActuatorMove()
 {
-    qDebug() << Q_FUNC_INFO;
+//    qDebug() << Q_FUNC_INFO;
 
     long position = 0;
     while(m_actuator->getPosition() != m_actuator->getSetPointPosition())
     {
         m_actuator->makeStep();
-        QThread::usleep(m_actuator->getSpeed());
+        QThread::msleep(m_actuator->getSpeed());
     }
 
     emit readyActuatorMove();

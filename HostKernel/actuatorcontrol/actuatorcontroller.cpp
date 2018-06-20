@@ -12,7 +12,7 @@ ActuatorController::ActuatorController()
 
     m_actuator = new Actuator;
     m_actuator->initialize(RPI_V2_GPIO_P1_08, RPI_V2_GPIO_P1_10, RPI_V2_GPIO_P1_12);
-    m_actuator->setSpeed(5000);
+    m_actuator->setSpeed(2);
 
     m_actuatorThread = new ActuatorThread(m_actuator);
     m_actuatorThread->moveToThread(&m_workerThread);
@@ -41,7 +41,7 @@ void ActuatorController::handleActuatorReady()
 
     if(m_actuatorStop)
     {
-        qDebug() << "Actuator stop";        
+        qDebug() << "Actuator stop";
     }
     else
     {

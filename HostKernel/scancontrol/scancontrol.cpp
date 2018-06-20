@@ -15,7 +15,7 @@ ScanControl::ScanControl(QObject *parent)
     m_sourceMuxAddress = 127;
     m_chipSelectPin1 = BCM2835_SPI_CS1;
     m_EN_1 = RPI_V2_GPIO_P1_11;
-    m_A0_1 = RPI_V2_GPIO_P1_12;
+    m_A0_1 = RPI_V2_GPIO_P1_16;
     m_A1_1 = RPI_V2_GPIO_P1_13;
     m_A2_1 = RPI_V2_GPIO_P1_15;
 

@@ -91,7 +91,7 @@ void Actuator::makeStep()
     }
     else
     {
-        if(!atHomeSwitch())
+        if(atHomeSwitch())
         {
             //Make step
             step();
@@ -108,7 +108,7 @@ void Actuator::makeStep()
         }
     }
 
-    qDebug() << "Actuator::postition: " << m_position;
+//    qDebug() << "Actuator::postition: " << m_position;
 //    bcm2835_gpio_write(m_stepPin, m_stepPinLevel);
 }
 

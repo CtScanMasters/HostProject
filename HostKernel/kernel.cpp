@@ -7,7 +7,7 @@ Kernel::Kernel()
 {
     m_iAmReady = false;
     m_arrayOffset = 2;
-    m_numberOfScans = 100;
+    m_numberOfScans = 10;
     m_scanCounter = 0;
     m_hostPortNumber = 5010;
     m_sendCounter = 0;
@@ -46,7 +46,7 @@ void Kernel::makeScan()
 
         m_scanCounter++;
 
-        m_actuatorController->setSetpointPosition(m_actuatorController->getPosition() + 10);
+        m_actuatorController->setSetpointPosition(m_actuatorController->getPosition() + 2);
         m_actuatorController->moveActuatorTo();
     }
     else
@@ -55,8 +55,6 @@ void Kernel::makeScan()
         m_actuatorController->stopActuatorMovement();
         commandHandler(COMMAND_SCAN_NEW_DATA);
     }
-
-
 }
 
 void Kernel::scanStart()
@@ -67,7 +65,7 @@ void Kernel::scanStart()
         m_iAmReady = false;
         m_isScanStopped = false;
         m_time.start();
-        m_actuatorController->setSetpointPosition(m_actuatorController->getPosition() + 200);
+        m_actuatorController->setSetpointPosition(m_actuatorController->getPosition() + 500);
         m_actuatorController->moveActuatorTo();
         qDebug() <<"SIGNAL YEAH" << connect(m_actuatorController, SIGNAL(actuatorReadySignal()), this, SLOT(makeScan()));
     }
@@ -270,7 +268,7 @@ bool Kernel::initializeHardwareControl()
 
     bcm2835_spi_setBitOrder(BCM2835_SPI_BIT_ORDER_MSBFIRST);
     bcm2835_spi_setDataMode(BCM2835_SPI_MODE0);
-    bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_1024); //Approx 1.5Mhz SPI clockrate
+    bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_2048); //Approx 1.5Mhz SPI clockrate
     bcm2835_spi_chipSelect(BCM2835_SPI_CS0);
 
     if(!bcm2835_spi_begin())
