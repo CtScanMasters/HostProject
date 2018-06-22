@@ -39,8 +39,9 @@ void ScanControl::doScan(quint8 startAddress, ScanData &scanData)
     {
         for(quint8 sourceNumber = 0; sourceNumber < m_numberOfSources; sourceNumber++)
         {
+            m_multiplexerSource->setChannel(arrayAddress);
             m_sourceArrayManager->setSource(arrayAddress, sourceNumber);
-            QThread::usleep(300);
+            bcm2835_delay(10);
             scanData.addArrayScan(arrayAddress, sourceNumber);
             m_sensorArrayManager->scanArray(arrayAddress, scanData);
         }

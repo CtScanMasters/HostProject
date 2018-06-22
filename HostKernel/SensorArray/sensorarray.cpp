@@ -12,14 +12,26 @@ SensorArray::SensorArray(quint8 address, quint8 numberOfSensors)
 
 }
 
-void SensorArray::getArrayData(ScanData &scanData)
+void SensorArray::getArrayData(ScanData &scanData, quint8 address)
 {
     //logMessage(MSG_INFO, "getArrayData");
-    for(int i = 0; i < m_numberOfSensors; i++)
+    if(address < 4)
     {
-        scanData.addSensorData(m_adConverter->getData(i));
-        //qDebug() << m_adConverter->getData(i);
+        for(int i = 0; i < m_numberOfSensors; i++)
+        {
+            scanData.addSensorData(m_adConverter->getData(i));
+            //qDebug() << m_adConverter->getData(i);
+        }
     }
+    else
+    {
+        for(int i = m_numberOfSensors; i > 0; i--)
+        {
+            scanData.addSensorData(m_adConverter->getData(i));
+            //qDebug() << m_adConverter->getData(i);
+        }
+    }
+
 }
 
 

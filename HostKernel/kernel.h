@@ -65,7 +65,7 @@ class Kernel : public QObject, private MessageLogger
         void makeScan();
         void readTcpData();
         void writeTcpData();
-        void setScanProgress();
+        void setScanProgress(quint8 progress);
         void commandHandler(quint8 command);
 
 	signals:

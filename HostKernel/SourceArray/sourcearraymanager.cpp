@@ -6,7 +6,7 @@ SourceArrayManager::SourceArrayManager(ChipSelectManager *chipSelectManager)
 {      
     setName("SourceArrayManager: ");
     logMessage(MSG_INFO, "build");
-    enableLogging(true);
+    enableLogging(false);
 
     m_numberOfArrays = 8;
 
@@ -20,10 +20,17 @@ void SourceArrayManager::setSource(quint8 address, quint8 sourceChannel)
 {
     m_chipSelectManager->setChipSelect(address);
 
-
     logMessage(MSG_INFO, QString("setSource: %1").arg(sourceChannel));
 
-    m_sourceArrayList.at(address)->setChannel(sourceChannel);
+    if(address < 4)
+    {
+        m_sourceArrayList.at(address)->setChannel(sourceChannel);
+    }
+    else
+    {
+        m_sourceArrayList.at(address)->setChannel(7 - sourceChannel);
+    }
+
 }
 
 void SourceArrayManager::clearSource(quint8 address)

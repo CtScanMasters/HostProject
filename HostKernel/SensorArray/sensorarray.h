@@ -13,7 +13,7 @@ class SensorArray : public QObject, private MessageLogger
 
     public:
         SensorArray(quint8 address, quint8 numberOfSensors);
-        void getArrayData(ScanData &scanData);
+        void getArrayData(ScanData &scanData, quint8 address);
 
     public slots:
 

@@ -1,6 +1,7 @@
 #include "actuatorthread.h"
 #include <QDebug>
 #include <QThread>
+#include "hardwarecontrol/bcm2835.h"
 
 ActuatorThread::ActuatorThread(Actuator *actuator)
     :m_actuator(actuator)
@@ -16,7 +17,8 @@ void ActuatorThread::doActuatorMove()
     while(m_actuator->getPosition() != m_actuator->getSetPointPosition())
     {
         m_actuator->makeStep();
-        QThread::msleep(m_actuator->getSpeed());
+//        QThread::msleep(m_actuator->getSpeed());
+        bcm2835_delay(1);
     }
 
     emit readyActuatorMove();

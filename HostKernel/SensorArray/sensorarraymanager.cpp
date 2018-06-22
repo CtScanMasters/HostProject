@@ -25,7 +25,7 @@ void SensorArrayManager::scanArray(quint8 address, ScanData &scanData)
 
     logMessage(MSG_INFO, QString("scanArray %1").arg(address));
 
-    m_sensorArrayList.at(address)->getArrayData(scanData);
+    m_sensorArrayList.at(address)->getArrayData(scanData, address);
 }
 
 

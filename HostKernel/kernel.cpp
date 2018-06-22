@@ -6,8 +6,8 @@
 Kernel::Kernel()
 {
     m_iAmReady = false;
-    m_arrayOffset = 2;
-    m_numberOfScans = 10;
+    m_arrayOffset = 2;         //13 juiste waarde
+    m_numberOfScans = 0;
     m_scanCounter = 0;
     m_hostPortNumber = 5010;
     m_sendCounter = 0;
@@ -45,8 +45,8 @@ void Kernel::makeScan()
         }
 
         m_scanCounter++;
-
-        m_actuatorController->setSetpointPosition(m_actuatorController->getPosition() + 2);
+        setScanProgress((((double)m_scanCounter / (m_numberOfScans + m_arrayOffset) * 100)));
+        m_actuatorController->setSetpointPosition(m_actuatorController->getPosition() + 23);
         m_actuatorController->moveActuatorTo();
     }
     else
@@ -64,8 +64,9 @@ void Kernel::scanStart()
         logMessage(MSG_INFO, "start scan");
         m_iAmReady = false;
         m_isScanStopped = false;
+        m_numberOfScans = m_bufferIn.at(1);
         m_time.start();
-        m_actuatorController->setSetpointPosition(m_actuatorController->getPosition() + 500);
+        m_actuatorController->setSetpointPosition(m_actuatorController->getPosition() + 1250);
         m_actuatorController->moveActuatorTo();
         qDebug() <<"SIGNAL YEAH" << connect(m_actuatorController, SIGNAL(actuatorReadySignal()), this, SLOT(makeScan()));
     }
@@ -108,10 +109,11 @@ void Kernel::sendNotReady()
 
 }
 
-void Kernel::setScanProgress()
+void Kernel::setScanProgress(quint8 progress)
 {
-    logMessage(MSG_INFO, "set scan progress");
+    logMessage(MSG_INFO, QString("set scan progress: %1").arg(progress));
     m_bufferOut.append(COMMAND_SCAN_SET_PROGRESS);
+    m_bufferOut.append(progress);
     writeTcpData();
 }
 
@@ -128,7 +130,9 @@ void Kernel::dataDelivery()
     logMessage(MSG_INFO, QString("send new data: %1").arg(m_sendCounter));
     if(m_sendCounter == m_numberOfScans)
     {
+        logMessage(MSG_INFO, "finish data transmission");
         commandHandler(COMMAND_SCAN_DATA_END);
+        actuatorHome();
         commandHandler(COMMAND_SCAN_STOP);
         return;
     }
@@ -204,7 +208,7 @@ void Kernel::commandHandler(quint8 command)
         scanStop();
         break;
     case COMMAND_SCAN_SET_PROGRESS:
-        setScanProgress();
+//        setScanProgress();
         break;
     case COMMAND_SCAN_GET_DATA:
         getScanData();

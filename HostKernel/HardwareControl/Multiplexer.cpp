@@ -40,13 +40,13 @@ void Multiplexer::setChannel(quint8 channel)
 {
     m_currentChannel = channel;
 
-    if(m_currentChannel == 255)
-    {
-        bcm2835_gpio_write(m_enable, HIGH);
-        logMessage(MSG_INFO, "setChannel: mux disabled");
-    }
-    else
-    {
+//    if(m_currentChannel == 255)
+//    {
+//        bcm2835_gpio_write(m_enable, HIGH);
+//        logMessage(MSG_INFO, "setChannel: mux disabled");
+//    }
+//    else
+//    {
         bcm2835_gpio_write(m_enable, LOW);
 
 //        logMessage(MSG_INFO, QString("setChannel: %1 : mask: %2 %3 %4")
@@ -58,7 +58,7 @@ void Multiplexer::setChannel(quint8 channel)
         bcm2835_gpio_write(m_A0, (channel & 0x01) >> 0);
         bcm2835_gpio_write(m_A1, (channel & 0x02) >> 1);
         bcm2835_gpio_write(m_A2, (channel & 0x04) >> 2);
-    }
+//    }
 
 }
 

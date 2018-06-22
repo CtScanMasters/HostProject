@@ -17,7 +17,7 @@ void Actuator::initialize(quint8 stepPin, quint8 directionPin, quint8 switchPin)
     m_direction = false;
     m_isHomed = false;
     m_atHomeSwitch = false;
-    m_speed = 100;
+    m_speed = 400;
 
     bcm2835_gpio_fsel(m_stepPin, BCM2835_GPIO_FSEL_OUTP);
     bcm2835_gpio_fsel(m_directionPin, BCM2835_GPIO_FSEL_OUTP);
